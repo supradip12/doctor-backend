@@ -37,7 +37,7 @@ export const verifyOtp = async (req, res) => {
   try {
     const { email, password } = req.body;
     const doctor = await Doctor.findOne({ email: email });
-    if (doctor) res.status(200).send(doctor);
+    if (doctor) res.status(200).send(doctor._id);
     if (!doctor)
       return res.status(400).json({ msg: "Doctor does not exist. " });
   } catch (err) {
