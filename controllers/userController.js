@@ -15,6 +15,8 @@ export const signUp = async (req, res) => {
       picturePath: req.body.picturePath,
       password: req.body.password,
       gender: req.body.gender,
+      number: req.body.number,
+      disease: req.body.disease,
     });
 
     const newUser = await user.save();
