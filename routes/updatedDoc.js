@@ -26,9 +26,10 @@ router.put("/:id", async (req, res) => {
       },
       { new: true }
     );
+
     res.status(200).json(updatedUser); // Return the output
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("Problem");
   }
 });
 
@@ -85,12 +86,24 @@ router.get("/todaycount/:id", async (req, res) => {
     console.log(Todaybooking);
     await doctor.save();
     let str = Todaybooking.length.toString();
-    console.log(str);
+    // console.log(str);
 
     // res.status(200).send(str);
     res.status(200).send(str);
   } catch (error) {
     res.status(500).json(error);
+  }
+});
+
+router.get("/bookinghistory/:id", async (req, res) => {
+  try {
+    const doctor = await Doctor.findById(req.params.id);
+
+    const bookHistory = doctor.BookHistory;
+
+    res.status(200).send(bookHistory);
+  } catch (error) {
+    res.status(500).send(error);
   }
 });
 
@@ -117,20 +130,22 @@ router.get("/nextpatent/:id", async (req, res) => {
 
     const upcomingBooking = user.upcomingbooking;
     const previousbooking = user.previousbooking;
-    console.log("Previos Bokking" + previousbooking);
-
+    const popedOrder = poppedElement.orderId;
     for (let i = 0; i < upcomingBooking.length; i++) {
       const booking = upcomingBooking[i];
-      console.log("Doctor id " + booking.orderId);
-      console.log("Get Doctor id " + poppedElement.orderId);
-      console.log(" ");
-      if (booking.orderId === poppedElement) {
+      const docid = popedOrder.toString();
+      const userid = booking.orderId;
+      const userorder = userid.toString();
+
+      if (docid === userorder) {
         previousbooking.push({
           doctorId: booking.doctorId,
           name: booking.name,
           time: booking.time,
           price: booking.price,
         });
+
+        console.log("After Entering id Condition");
         upcomingBooking.splice(i, 1);
         i--;
         break;
@@ -140,14 +155,15 @@ router.get("/nextpatent/:id", async (req, res) => {
     await doctor.save();
     await user.save();
 
-    // const remainng = TodayBooking.length;
-    // const remainpatient = remainng.toString();
-    res.status(200).json(previousbooking);
+    const remainng = TodayBooking.length;
+    const remainpatient = remainng.toString();
+    res.status(200).json(remainpatient);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
+<<<<<<< HEAD
 router.get("/bookinghistory/:id", async (req, res) => {
   try {
     const doctor = await Doctor.findById(req.params.id);
@@ -159,6 +175,8 @@ router.get("/bookinghistory/:id", async (req, res) => {
     res.status(500).send(error);
   }
 });
+=======
+>>>>>>> 61774bc948d4879ee7c3fbef0272344aff954708
 
 // Get All doctor Information
 router.get("/", async (req, res) => {

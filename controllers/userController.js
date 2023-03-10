@@ -15,6 +15,8 @@ export const signUp = async (req, res) => {
       picturePath: req.body.picturePath,
       password: req.body.password,
       gender: req.body.gender,
+      number: req.body.number,
+      disease: req.body.disease,
     });
 
     const newUser = await user.save();
@@ -28,7 +30,8 @@ export const verifyOtp = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
-    if (user) res.status(200).send(user);
+    const str = user._id.toString();
+    if (user) res.status(200).send(str.replace(/"/g, ""));
     if (!user) return res.status(400).json({ msg: "User does not exist. " });
   } catch (err) {
     res.status(500).json({ error: err.message });
