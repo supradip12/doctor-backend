@@ -59,7 +59,7 @@ router.delete("/delete/:id", async (req, res) => {
 });
 
 // Get Today's patient Count
-router.get("/todaycount/:id", async (req, res) => {
+router.post("/todaycount/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const doctor = await Doctor.findById(id);
@@ -93,18 +93,6 @@ router.get("/todaycount/:id", async (req, res) => {
     res.status(200).send(str);
   } catch (error) {
     res.status(500).json(error);
-  }
-});
-
-router.get("/bookinghistory/:id", async (req, res) => {
-  try {
-    const doctor = await Doctor.findById(req.params.id);
-
-    const bookHistory = doctor.BookHistory;
-
-    res.status(200).send(bookHistory);
-  } catch (error) {
-    res.status(500).send(error);
   }
 });
 
