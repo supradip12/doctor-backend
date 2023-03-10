@@ -93,6 +93,17 @@ router.get("/todaycount/:id", async (req, res) => {
     res.status(500).json(error);
   }
 });
+router.get("/bookinghistory/:id", async (req, res) => {
+  try {
+    const doctor = await Doctor.findById(req.params.id);
+
+    const bookHistory = doctor.BookHistory;
+
+    res.status(200).send(bookHistory);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
 // Get next patient
 router.get("/nextpatent/:id", async (req, res) => {
