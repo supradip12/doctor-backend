@@ -58,7 +58,7 @@ router.delete("/delete/:id", async (req, res) => {
   }
 });
 
-/ Get Today's patient Count
+// Get Today's patient Count
 router.get("/todaycount/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -162,6 +162,7 @@ router.get("/nextpatent/:id", async (req, res) => {
     res.status(500).json(error);
   }
 });
+
 
 // Get All doctor Information
 router.get("/", async (req, res) => {
