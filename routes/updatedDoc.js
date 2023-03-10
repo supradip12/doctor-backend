@@ -85,8 +85,9 @@ router.post("/todaycount/:id", async (req, res) => {
         i--;
       }
     }
-    // console.log(Booking);
-    // console.log(Todaybooking);
+    console.log(Booking);
+    console.log("and");
+    console.log(Todaybooking);
     await doctor.save();
     let str = Todaybooking.length.toString();
     // console.log(str);
