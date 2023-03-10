@@ -83,7 +83,7 @@ router.get("/todaycount/:id", async (req, res) => {
       }
     }
     // console.log(Booking);
-    // console.log(Todaybooking);
+    console.log(Todaybooking);
     await doctor.save();
     let str = Todaybooking.length.toString();
     // console.log(str);
