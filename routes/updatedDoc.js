@@ -89,6 +89,7 @@ router.get("/todaycount/:id", async (req, res) => {
     // console.log(str);
 
     // res.status(200).send(str);
+    // update
     res.status(200).send(str);
   } catch (error) {
     res.status(500).json(error);
