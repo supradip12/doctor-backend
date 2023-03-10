@@ -74,9 +74,12 @@ router.post("/todaycount/:id", async (req, res) => {
         year: "numeric",
       })
       .replace(/\//g, "-");
+    console.log("koira hala  " + formattedDate);
 
     for (let i = 0; i < Booking.length; i++) {
+      console.log("enter");
       if (Booking[i].time === formattedDate) {
+        console.log(Booking[i].time + "and" + formattedDate);
         Todaybooking.push(Booking[i]);
         Booking.splice(i, 1);
         i--;
