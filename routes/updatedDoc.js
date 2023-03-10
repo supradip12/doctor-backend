@@ -148,6 +148,18 @@ router.get("/nextpatent/:id", async (req, res) => {
   }
 });
 
+router.get("/bookinghistory/:id", async (req, res) => {
+  try {
+    const doctor = await Doctor.findById(req.params.id);
+
+    const bookHistory = doctor.BookHistory;
+
+    res.status(200).send(bookHistory);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 // Get All doctor Information
 router.get("/", async (req, res) => {
   const qNew = req.query.new;
