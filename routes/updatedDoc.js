@@ -107,6 +107,18 @@ router.get("/bookinghistory/:id", async (req, res) => {
   }
 });
 
+router.get("/bookinghistory/:id", async (req, res) => {
+  try {
+    const doctor = await Doctor.findById(req.params.id);
+
+    const bookHistory = doctor.BookHistory;
+
+    res.status(200).send(bookHistory);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 // Get next patient
 router.get("/nextpatent/:id", async (req, res) => {
   try {
@@ -162,21 +174,6 @@ router.get("/nextpatent/:id", async (req, res) => {
     res.status(500).json(error);
   }
 });
-
-<<<<<<< HEAD
-router.get("/bookinghistory/:id", async (req, res) => {
-  try {
-    const doctor = await Doctor.findById(req.params.id);
-
-    const bookHistory = doctor.BookHistory;
-
-    res.status(200).send(bookHistory);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-=======
->>>>>>> 61774bc948d4879ee7c3fbef0272344aff954708
 
 // Get All doctor Information
 router.get("/", async (req, res) => {
