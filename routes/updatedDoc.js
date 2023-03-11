@@ -148,6 +148,7 @@ router.get("/nextpatent/:id", async (req, res) => {
           name: booking.name,
           time: booking.time,
           price: booking.price,
+          docpicture: booking.docpicture,
         });
 
         console.log("After Entering id Condition");
@@ -230,13 +231,10 @@ router.get("/", async (req, res) => {
           $in: [qCategory],
         },
         online: true,
+        price: qPrice, // filter by price query parameter
       });
     } else {
-      doctor = await Doctor.find({ online: true });
-    }
-
-    if (qPrice) {
-      doctor = doctor.filter((doc) => doc.amount <= qPrice);
+      doctor = await Doctor.find({ online: true, price: qPrice }); // filter by price query parameter
     }
 
     res.status(200).json(doctor);

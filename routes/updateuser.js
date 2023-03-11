@@ -85,6 +85,7 @@ router.get("/bookinghistory/:id", async (req, res) => {
           time: booking.time,
           price: booking.price,
           orderId: booking.orderId,
+          docpicture: booking.docpicture,
         });
         upcomingBooking.splice(i, 1);
         i--;

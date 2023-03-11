@@ -54,6 +54,7 @@ router.post("/", async (req, res) => {
       serial: serialNo + 1,
       price: Amount,
       orderId: orderId,
+      docpicture: doctor.picturePath,
     };
 
     if (serialNo < 20) {

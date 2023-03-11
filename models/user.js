@@ -61,6 +61,9 @@ const userSchema = mongoose.Schema(
       serial: {
         type: String,
       },
+      docpicture: {
+        type: String,
+      },
       price: {
         type: String,
       },
@@ -81,6 +84,9 @@ const userSchema = mongoose.Schema(
         type: String,
       },
       orderId: {
+        type: String,
+      },
+      docpicture: {
         type: String,
       },
     },
