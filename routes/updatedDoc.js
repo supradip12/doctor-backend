@@ -59,7 +59,7 @@ router.delete("/delete/:id", async (req, res) => {
 });
 
 // Get Today's patient Count
-router.post("/todaycount/:id", async (req, res) => {
+router.get("/todaycount/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const doctor = await Doctor.findById(id);
@@ -74,26 +74,26 @@ router.post("/todaycount/:id", async (req, res) => {
         year: "numeric",
       })
       .replace(/\//g, "-");
-    console.log("koira hala  " + formattedDate);
+    // console.log("koira hala  " + formattedDate);
+    // console.log(Booking[i].time + "and" + formattedDate);
 
     for (let i = 0; i < Booking.length; i++) {
       console.log("enter");
       if (Booking[i].time === formattedDate) {
-        console.log(Booking[i].time + "and" + formattedDate);
         Todaybooking.push(Booking[i]);
         Booking.splice(i, 1);
         i--;
       }
     }
-    console.log(Booking);
-    console.log("and");
-    console.log(Todaybooking);
-    await doctor.save();
-    let str = Todaybooking.length.toString();
-    console.log(str);
-
+    // console.log(Booking);
+    // console.log("and");
+    // console.log(Todaybooking);
+    // console.log(str);
     // res.status(200).send(str);
     // update
+    await doctor.save();
+    let str = Todaybooking.length.toString();
+
     res.status(200).send(str);
   } catch (error) {
     res.status(500).json(error);
