@@ -90,7 +90,7 @@ router.post("/todaycount/:id", async (req, res) => {
     console.log(Todaybooking);
     await doctor.save();
     let str = Todaybooking.length.toString();
-    // console.log(str);
+    console.log(str);
 
     // res.status(200).send(str);
     // update
