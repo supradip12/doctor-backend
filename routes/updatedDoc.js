@@ -129,6 +129,7 @@ router.get("/nextpatent/:id", async (req, res) => {
       name: poppedElement.name,
       time: poppedElement.time,
       orderId: poppedElement.orderId,
+      patpicture: poppedElement.userId?.picturePath,
     });
     const userId = poppedElement.userId;
     const user = await User.findById(userId);

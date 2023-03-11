@@ -134,6 +134,9 @@ const doctorSchema = mongoose.Schema(
       time: {
         type: String,
       },
+      patpicture: {
+        type: String,
+      },
     },
 
     online: {
