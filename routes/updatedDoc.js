@@ -168,6 +168,23 @@ router.get("/nextpatent/:id", async (req, res) => {
   }
 });
 
+// Serach Doc
+router.post("/searchdoc", async (req, res) => {
+  try {
+    var search = req.body.search;
+    var serachdata = await Doctor.find({
+      name: { $regex: ".*" + search + ".*", $options: "i" },
+    });
+    if (serachdata.length > 0) {
+      res.status(200).json(serachdata);
+    } else {
+      res.status(200).json("Doctor not found!");
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 // Get All doctor Information
 router.get("/", async (req, res) => {
   const qNew = req.query.new;
