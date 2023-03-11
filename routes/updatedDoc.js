@@ -171,6 +171,7 @@ router.get("/nextpatent/:id", async (req, res) => {
 // Serach Doc
 router.post("/searchdoc", async (req, res) => {
   try {
+    // error control
     var search = req.body.search;
     var serachdata = await Doctor.find({
       name: { $regex: ".*" + search + ".*", $options: "i" },
@@ -186,9 +187,38 @@ router.post("/searchdoc", async (req, res) => {
 });
 
 // Get All doctor Information
+// router.get("/", async (req, res) => {
+//   const qNew = req.query.new;
+//   const qCategory = req.query.Specialist;
+//   try {
+//     let doctor;
+
+//     if (qNew) {
+//       doctor = await Doctor.find().sort({ createdAt: -1 }).limit(1);
+//     } else if (qCategory) {
+//       doctor = await Doctor.find({
+//         Specialist: {
+//           $in: [qCategory],
+//         },
+//         online: true,
+//       });
+//     } else {
+//       doctor = await Doctor.find({ online: true });
+//     }
+
+//     res.status(200).json(doctor);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
+// Get All doctor Information
+
 router.get("/", async (req, res) => {
   const qNew = req.query.new;
   const qCategory = req.query.Specialist;
+  const qPrice = req.query.amount;
+
   try {
     let doctor;
 
@@ -203,6 +233,10 @@ router.get("/", async (req, res) => {
       });
     } else {
       doctor = await Doctor.find({ online: true });
+    }
+
+    if (qPrice) {
+      doctor = doctor.filter((doc) => doc.amount <= qPrice);
     }
 
     res.status(200).json(doctor);
