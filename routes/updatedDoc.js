@@ -166,9 +166,10 @@ router.get("/nextpatent/:id", async (req, res) => {
 
     const remainng = TodayBooking.length;
     const remainpatient = remainng.toString();
-    res.status(200).json(remainpatient);
+    const remainingPatient = Math.max(remainpatient, 0);
+    res.status(200).json(remainingPatient);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(200).json("0");
   }
 });
 
