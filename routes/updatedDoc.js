@@ -123,13 +123,15 @@ router.get("/nextpatent/:id", async (req, res) => {
     const BookingHistory = doctor.BookHistory;
 
     const poppedElement = TodayBooking.shift();
-
+    // console.log()
+    const patpic = await User.findById(poppedElement.userId);
+    // console.log(patpic.picturePath);
     BookingHistory.push({
       userId: poppedElement.userId,
       name: poppedElement.name,
       time: poppedElement.time,
       orderId: poppedElement.orderId,
-      patpicture: poppedElement.userId?.picturePath,
+      patpicture: patpic.picturePath,
     });
     const userId = poppedElement.userId;
     const user = await User.findById(userId);
