@@ -67,13 +67,15 @@ router.get("/todaycount/:id", async (req, res) => {
     const Todaybooking = doctor.TodayBooking;
     const today = new Date();
 
-    const formattedDate = today
+   const formattedDate = today
       .toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "2-digit",
         year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
       })
-      .replace(/\//g, "-");
+      .split("/")
+      .reverse()
+      .join("-");
     // console.log("koira hala  " + formattedDate);
     // console.log(Booking[i].time + "and" + formattedDate);
 
